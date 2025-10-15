@@ -7,7 +7,7 @@ import CustomerPanel from './components/CustomerPanel.jsx'
 function createInitialBooks() {
   const randomAvail = () => 4 + Math.floor(Math.random() * 2) // 4-5
   return [
-    { title: 'The Amazing Spider-Man', author: 'Stan Lee', category: 'Marvel', priceRupees: 399, rentPerDayRupees: 15, availability: randomAvail() },
+    { title: 'The Amazing Spider-Man 2', author: 'Stan Lee', category: 'Marvel', priceRupees: 399, rentPerDayRupees: 15, availability: randomAvail() },
     { title: 'Batman: Year One', author: 'Frank Miller', category: 'DC', priceRupees: 499, rentPerDayRupees: 20, availability: randomAvail() },
     { title: 'Watchmen', author: 'Alan Moore', category: 'DC', priceRupees: 599, rentPerDayRupees: 22, availability: randomAvail() },
     { title: 'X-Men: Dark Phoenix Saga', author: 'Chris Claremont', category: 'Marvel', priceRupees: 449, rentPerDayRupees: 18, availability: randomAvail() },
