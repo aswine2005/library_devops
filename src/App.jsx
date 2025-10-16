@@ -167,7 +167,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <span>Built with React + Vite</span>
+        <span>Done by Aswin</span>
       </footer>
     </div>
   )
