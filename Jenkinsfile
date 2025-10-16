@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        REPO_URL = 'https://github.com/aswine2005/library_devops.git'
+        BRANCH   = 'main'
+        DEPLOY_DIR = '/var/www/html'
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
                 echo '📥 Cloning repository...'
-                git branch: 'main', url: 'https://github.com/aswine2005/library_devops.git'
+                git branch: "${BRANCH}", url: "${REPO_URL}"
             }
         }
 
@@ -18,25 +24,30 @@ pipeline {
 
         stage('Build React App') {
             steps {
-                echo '🏗️ Building project...'
+                echo '🏗️ Building React project...'
                 sh 'npm run build'
             }
         }
 
         stage('Deploy to EC2 (Nginx)') {
             steps {
-                echo '🚀 Deploying to /var/www/html...'
+                echo '🚀 Deploying build to /var/www/html...'
                 sh '''
                     sudo rm -rf /var/www/html/*
                     sudo cp -r build/* /var/www/html/
+                    sudo chown -R www-data:www-data /var/www/html
                 '''
             }
         }
+    }
 
-        stage('Post-Build') {
-            steps {
-                echo '✅ Deployment completed successfully!'
-            }
+    post {
+        success {
+            echo '✅ Deployment completed successfully!'
+        }
+        failure {
+            echo '❌ Build or deployment failed — check Jenkins logs.'
         }
     }
 }
+
